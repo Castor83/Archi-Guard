@@ -30,3 +30,6 @@ tests/plugin-integration.test.mjs
 tests/test_bridge_plugin.py
 tests/test_precompact_handoff.py
 work/native-correction-test/Invoke-NativeCorrectionCheck.ps1
+docs/reports/2026-10-30-coderabbit-fixes.md
+docs/superpowers/plans/2026-10-30-review-fixes.md
+tests/test_review_regressions.py

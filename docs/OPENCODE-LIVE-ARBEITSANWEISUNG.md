@@ -79,7 +79,7 @@ Der historisch geprüfte und global übertragene Vorgänger war `global-v0.4`: A
 - Plugin-ID: `archi.guard.global`; Laufzeitversion im erfolgreichen Nachweis: `global-v0.4`; geprüfter OpenCode-Host: Desktop 2.1.4.
 - Damalige Modellreferenz beim Abgleich: `ollama/hf.co/unsloth/Qwen3.8-27B-GGUF:UD-Q3_K_XL`. Der danach ausgewertete Praxistest dieses Reparaturanlasses verwendete laut Nutzer `gpt-oss-20b-32k:latest`. Nutze das vom Menschen gewählte Modell; der Guard darf es nicht selbst umschalten. Andere Provider-/Modellreferenzen wurden offline geprüft, nicht alle live abgenommen.
 
-Der neue Quellstand ist `global-v0.5`: robustere Marker-Erkennung und ausdrückliche Nichtabnahme bei fehlenden prüfbaren Befunden. Seine Offline-Prüfung, globale Übertragung und Beobachtung im nativen Host sind getrennt anhand aktueller Belege festzustellen. Die obigen Nachweise des Vorgängers bestätigen weder einen geladenen v0.5-Host noch dessen native Abnahme.
+Der historische Zwischenstand `global-v0.5` ergänzte robustere Marker-Erkennung und ausdrückliche Nichtabnahme bei fehlenden prüfbaren Befunden. Der aktuelle Quellstand ist `global-v0.6` mit sitzungs- und workspacegebundener Read-Provenienz. Seine Offline-Prüfung, Übertragung und tatsächliche Hostbeobachtung bleiben getrennte Nachweise; maßgeblich sind die v0.6-Nachträge am Dokumentanfang. Die obigen v0.4-Nachweise bestätigen keine neuere native Abnahme.
 
 Die alte Projektpause vom 26.10.2026 ist historisch. Ältere Übergaben mit „nur Offline-Planung“ oder „keine Korrekturschleife implementiert“ beschreiben nicht mehr diesen Stand.
 
@@ -152,7 +152,7 @@ Fehlende/leere Blöcke melden `BEFUNDE_FEHLEN_UNGEPRUEFT` und lösen keine autom
 ## Ablauf des gemeinsamen Praxistests
 
 1. Lies die konkrete Aufgabe und das betroffene Projekt. Benenne kurz Ziel und überprüfbare Erfolgskriterien. Erfinde keine weitere Aufgabe.
-2. Prüfe vorhandene Host-/Guardinformationen lesend, soweit sie zugänglich sind. Exakte Plugin-ID und Version bzw. für den neuen Stand `archi_guard_observed=global-v0.5` beim ersten ohnehin notwendigen Read sind mögliche Belege. Kennzeichne einen nicht zugänglichen Status als offen. Eine Datei auf der Platte ersetzt keinen Nachweis des geladenen Hosts.
+2. Prüfe vorhandene Host-/Guardinformationen lesend, soweit sie zugänglich sind. Exakte Plugin-ID und Version bzw. für den neuen Stand `archi_guard_observed=global-v0.6` beim ersten ohnehin notwendigen Read sind mögliche Belege. Kennzeichne einen nicht zugänglichen Status als offen. Eine Datei auf der Platte ersetzt keinen Nachweis des geladenen Hosts.
 3. Bearbeite den Auftrag normal und mit den nötigen Werkzeugen. Keine vorgeschaltete Testserie, kein absichtlicher Falschbefund, keine Änderung am Guard nur zur Erzeugung eines Testerfolgs.
 4. Schließe die Antwort mit ehrlichen Befunddaten ab. Lass die nachgelagerte Prüfung und gegebenenfalls begrenzte Nachkorrektur regulär laufen.
 5. Werte danach gemeinsam mit dem Menschen den abgeschlossenen Lauf aus. Falls die Auswertung in einem Folgeturn erfolgt, ordne den ursprünglichen Arbeitsauftrag ausdrücklich zu. Ein Audit zur gerade noch nicht abgeschlossenen Antwort kann noch nicht vorliegen.

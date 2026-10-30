@@ -9,7 +9,6 @@ import { fileURLToPath } from 'node:url';
 const api = await import('../global-plugin/runtime.mjs').catch(() => ({}));
 const correctionApi = await import('../global-plugin/correction.mjs');
 const bridgePath = fileURLToPath(new URL('../archi_bridge_v2.py', import.meta.url));
-const pythonPath = 'C:/Users/USER/AppData/Local/Programs/Python/Python313/python.exe';
 
 function host(root, model) {
   const hooks = new Map(), messages = new Map(), pending = [], dispatches = [];
@@ -73,7 +72,7 @@ async function fixture(t, options = {}) {
     h.ctx.location.workspaceID = options.workspaceID;
     h.session.location.workspaceID = options.workspaceID;
   }
-  const cleanup = await api.setupGuard(h.ctx, { pythonPath, bridgePath, logPath, ...options });
+  const cleanup = await api.setupGuard(h.ctx, { bridgePath, logPath, ...options });
   t.after(cleanup);
   async function turn(sessionID = 'ses_test', text = answer(source), agent = 'build') {
     const messageID = 'msg_' + sessionID;
@@ -179,7 +178,7 @@ test('Python-Zeitlimit beendet nur den eigenen Pruefprozess', async t => {
   const slow = join(root, 'slow.py');
   await writeFile(slow, 'import time\ntime.sleep(10)\n');
   await assert.rejects(api.runBridge({ text: '', reads: [] }, root, {
-    pythonPath, bridgePath: slow, timeoutMs: 80,
+    bridgePath: slow, timeoutMs: 80,
   }), /ARCHI_BRIDGE/);
 });
 
@@ -369,7 +368,7 @@ test('Bridge-Transport weist falsche Abdeckungswerte als Protokollfehler zurueck
   for (const abdeckung of invalid) {
     const bridge = await staticBridge(t, { status: 'GEPRUEFT', rows: [], freigabe: 'NEIN', abdeckung });
     await assert.rejects(api.runBridge({ text: '', reads: [] }, bridge.root, {
-      pythonPath, bridgePath: bridge.path,
+      bridgePath: bridge.path,
     }), /ARCHI_BRIDGE_PROTOCOL/);
   }
 });
@@ -452,7 +451,7 @@ test('Nie angenommene Korrektur sperrt neuen menschlichen Kontext nicht und spae
   await f.cleanup();
   const reloaded = host(f.root, nextModel);
   reloaded.messages.set('ses_test', f.messages.get('ses_test'));
-  const cleanup = await api.setupGuard(reloaded.ctx, { pythonPath, bridgePath, logPath: f.logPath });
+  const cleanup = await api.setupGuard(reloaded.ctx, { bridgePath, logPath: f.logPath });
   t.after(cleanup);
   await assert.rejects(correctionRequest(reloaded, nextModel), /ARCHI_CORRECTION_BLOCKED/);
   assert.equal(reloaded.dispatches.length, 0);
@@ -464,7 +463,7 @@ test('Echter Reload ohne alten Prompt-Hook hydriert Korrekturbindung und prueft 
   await untilRows(f.logPath); deliverCorrection(f); await f.cleanup();
   const next = host(f.root, qwen);
   next.messages.set('ses_test', f.messages.get('ses_test'));
-  const cleanup = await api.setupGuard(next.ctx, { pythonPath, bridgePath, logPath: f.logPath });
+  const cleanup = await api.setupGuard(next.ctx, { bridgePath, logPath: f.logPath });
   t.after(cleanup);
   await correctionRequest(next);
   next.messages.get('ses_test').push({ id: 'assistant_after_real_reload', type: 'assistant', model: qwen,
@@ -483,7 +482,7 @@ test('Echter Reload sperrt Modellwechsel vor dem ersten Korrekturschritt', async
   await untilRows(f.logPath); deliverCorrection(f); await f.cleanup();
   const next = host(f.root, qwen);
   next.messages.set('ses_test', f.messages.get('ses_test'));
-  const cleanup = await api.setupGuard(next.ctx, { pythonPath, bridgePath, logPath: f.logPath });
+  const cleanup = await api.setupGuard(next.ctx, { bridgePath, logPath: f.logPath });
   t.after(cleanup);
   await assert.rejects(correctionRequest(next, { providerID: 'remote', id: 'other' }), /ARCHI_CORRECTION_BLOCKED/);
 });
@@ -497,7 +496,7 @@ test('Persistente Aktivbindung sperrt Kontextverlust durch Compaction und Reload
   const nextModel = { providerID: 'custom-provider', id: 'other-model' };
   const next = host(f.root, nextModel);
   next.messages.set('ses_test', [{ id: 'msg_compacted', type: 'compaction', status: 'completed', summary: 'Zusammenfassung' }]);
-  const cleanup = await api.setupGuard(next.ctx, { pythonPath, bridgePath, logPath: f.logPath });
+  const cleanup = await api.setupGuard(next.ctx, { bridgePath, logPath: f.logPath });
   t.after(cleanup);
   await assert.rejects(correctionRequest(next, nextModel), /ARCHI_CORRECTION_BLOCKED/);
   await assert.rejects(correctionRequest(next, qwen), /ARCHI_CORRECTION_BLOCKED/, 'Ohne Originalzuordnung keine Fortsetzung');
@@ -535,7 +534,7 @@ test('Echter Reload auditiert bereits abgeschlossene Folgeantwort ohne Prompt- o
   const next = host(f.root, qwen);
   next.messages.set('ses_test', [...f.messages.get('ses_test'), { id: 'assistant_finished_during_reload',
     type: 'assistant', model: qwen, finish: 'stop', content: [{ type: 'text', text: answer(f.source) }] }]);
-  const cleanup = await api.setupGuard(next.ctx, { pythonPath, bridgePath, logPath: f.logPath });
+  const cleanup = await api.setupGuard(next.ctx, { bridgePath, logPath: f.logPath });
   t.after(cleanup);
   next.emit('ses_test');
   const reports = await untilRows(f.logPath, 2);
@@ -553,7 +552,7 @@ test('Reload behandelt eine Laengenbegrenzung ohne terminalen Hostabschluss weit
   await f.cleanup();
   const next = host(f.root, qwen);
   next.messages.set('ses_test', f.messages.get('ses_test'));
-  const cleanup = await api.setupGuard(next.ctx, { pythonPath, bridgePath, logPath: f.logPath });
+  const cleanup = await api.setupGuard(next.ctx, { bridgePath, logPath: f.logPath });
   t.after(cleanup);
   await assert.rejects(correctionRequest(next, { providerID: 'remote', id: 'other' }), /ARCHI_CORRECTION_BLOCKED/);
 });
@@ -881,7 +880,7 @@ test('Plugin-Neuladen behaelt Budget und korrigiert dieselbe abgeschlossene Antw
   await untilRows(f.logPath); await f.cleanup();
   const next = host(f.root, qwen);
   next.messages.set('ses_test', f.messages.get('ses_test'));
-  const cleanup = await api.setupGuard(next.ctx, { pythonPath, bridgePath, logPath: f.logPath });
+  const cleanup = await api.setupGuard(next.ctx, { bridgePath, logPath: f.logPath });
   t.after(cleanup);
   await next.hooks.get('prompt')({ sessionID: 'ses_test', messageID: 'msg_ses_test', prompt: { text: 'Pruefe' } });
   next.emit('ses_test'); let reports = await untilRows(f.logPath, 2);
@@ -905,7 +904,7 @@ test('Scope: fremde Instanz uebernimmt Nachkorrektur weder im Modellhook noch im
     foreignContextReads++;
     return f.messages.get(sessionID) ?? [];
   };
-  const cleanup = await api.setupGuard(other.ctx, { pythonPath, bridgePath, logPath: f.logPath,
+  const cleanup = await api.setupGuard(other.ctx, { bridgePath, logPath: f.logPath,
     correctionDirectory: join(f.root, 'corrections') });
   let closed = false;
   const closeOther = async () => { if (!closed) { closed = true; await cleanup(); } };
@@ -949,7 +948,7 @@ test('Scope: fehlende oder ungueltige Instanzlocation wird beim Setup sichtbar a
     const h = host(root, qwen); h.ctx.location = location;
     let cleanup;
     t.after(async () => { await cleanup?.(); });
-    await assert.rejects(async () => { cleanup = await api.setupGuard(h.ctx, { pythonPath, bridgePath,
+    await assert.rejects(async () => { cleanup = await api.setupGuard(h.ctx, { bridgePath,
       logPath: join(root, 'audit.jsonl') }); }, /LOCATION/);
   }
 });

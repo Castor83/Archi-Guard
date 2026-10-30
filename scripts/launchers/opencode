@@ -1,2 +1,3 @@
 #!/bin/sh
-exec "C:/Users/USER/AppData/Local/Programs/@opencodedesktop/resources/opencode-cli.exe" "$@"
+: "${LOCALAPPDATA:?LOCALAPPDATA is required to locate the installed CLI}"
+exec "$LOCALAPPDATA/Programs/@opencodedesktop/resources/opencode-cli.exe" "$@"

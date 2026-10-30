@@ -220,11 +220,6 @@ def capture_snapshot(event, *, codex_home=None):
             handle.flush()
             os.fsync(handle.fileno())
         manifest['completed_at_utc'] = datetime.now(timezone.utc).isoformat()
-        with (directory / 'manifest.json').open('x', encoding='utf-8', newline='\n') as handle:
-            json.dump(manifest, handle, ensure_ascii=False, indent=2, allow_nan=False)
-            handle.write('\n')
-            handle.flush()
-            os.fsync(handle.fileno())
         if manifest['status'] == 'PASS':
             try:
                 confirmed = _verified(manifest)
@@ -233,8 +228,14 @@ def capture_snapshot(event, *, codex_home=None):
             if not confirmed:
                 manifest['status'] = 'ERROR'
                 manifest['error'] = 'Read-back verification failed.'
-                _atomic_json(directory / 'manifest.json', manifest)
-                return manifest
+        # Publish a receipt only after its copied bytes have been checked.
+        # Interruption before this point must not leave an unverified PASS.
+        with (directory / 'manifest.json').open('x', encoding='utf-8', newline='\n') as handle:
+            json.dump(manifest, handle, ensure_ascii=False, indent=2, allow_nan=False)
+            handle.write('\n')
+            handle.flush()
+            os.fsync(handle.fileno())
+        if manifest['status'] == 'PASS':
             _atomic_json(parent / 'latest.json', manifest)
         return manifest
     except (OSError, ValueError, TypeError) as exc:

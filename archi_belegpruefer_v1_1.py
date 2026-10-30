@@ -258,8 +258,11 @@ def cli() -> int:
         inp = Path(args.input).resolve(strict=True)
         if not inp.is_file():
             raise ValueError("Eingabe ist keine Datei")
-        out = Path(args.output).resolve(strict=False)
-        if out == inp or (out.exists() and (out.is_symlink() or not out.is_file())):
+        original_out = Path(args.output)
+        if original_out.is_symlink():
+            raise ValueError("Ausgabe darf kein Symlink sein")
+        out = original_out.resolve(strict=False)
+        if out == inp or (out.exists() and not out.is_file()):
             raise ValueError("Ausgabe darf nicht die Eingabe oder ein Symlink sein")
         if not out.parent.exists():
             raise ValueError("Ausgabeverzeichnis existiert nicht")

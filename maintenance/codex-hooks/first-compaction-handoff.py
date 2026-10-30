@@ -5,7 +5,10 @@ import sys
 
 def main():
     try:
-        event = json.loads(sys.stdin.read(65537))
+        raw = sys.stdin.buffer.read(65537)
+        if len(raw) > 65536:
+            raise ValueError('Fallback event exceeds limit')
+        event = json.loads(raw.decode('utf-8-sig'))
         if (event.get('hook_event_name') != 'SessionStart' or event.get('source') != 'compact'
                 or event.get('subagent_id')):
             print('{}')
