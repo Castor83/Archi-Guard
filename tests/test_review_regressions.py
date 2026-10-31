@@ -51,7 +51,7 @@ class ReviewRegressions(unittest.TestCase):
             cwd = root / 'project'
             (home / 'sessions').mkdir(parents=True)
             (cwd / 'work/handoff').mkdir(parents=True)
-            sid = '01a17768-341b-7c71-94be-70a5967cdc6e'
+            sid = '00000000-0000-4000-8000-000000000001'
             transcript = home / 'sessions/local.jsonl'
             transcript.write_text('{}\n', encoding='utf-8')
             (cwd / 'work/handoff' / (sid + '-working.md')).write_text('Local fixture', encoding='utf-8')

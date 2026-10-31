@@ -4,7 +4,7 @@ Stand: 27.10.2026, Europe/Berlin. Status: Reparatur offline geprüft und global 
 
 ## Auftrag und Anlass
 
-Der Nutzer autorisierte im OpenCode-Praxistest die Reparatur der beobachteten Format-/Abdeckungslücke mit „dafür machen wir diese Tests“. Ursprungs-Chat: 01a17d8a-9dd4-7b12-b47a-61426188c749. Seine ausdrücklich gewählte Modellreferenz bleibt GPT-OSS; keine Modellumstellung durch diese Arbeit.
+Der Nutzer autorisierte im OpenCode-Praxistest die Reparatur der beobachteten Format-/Abdeckungslücke mit „dafür machen wir diese Tests“. Ursprungs-Chat: 00000000-0000-4000-8000-000000000005. Seine ausdrücklich gewählte Modellreferenz bleibt GPT-OSS; keine Modellumstellung durch diese Arbeit.
 
 Die reale OpenCode-Antwort suchte durchgehend nach THIS_HIVE statt dem beauftragten THEHIVE-Dateinamen und behauptete einen fehlenden Import. Tatsächlich stehen die eingehenden Quellen-/Evidenzfelder bereits im kanonischen TheHive-DATA. Der zugehörige global-v0.4-Audit vom 27.10.2026, 14:44:39 Uhr Berlin, ist anhand der Sitzung, der ursprünglichen Benutzernachrichten-ID und des Antworttexts exakt zugeordnet: fehlender erkannter Block, null geprüfte Aussagen, null Korrekturen. Die Antwort enthielt fett formatierte Marker und eine leere JSON-Liste.
 

@@ -66,7 +66,7 @@ acceptance. Global Q3 autostart remains unrelated and open.
 ## Native acceptance boundary, 2026-10-30
 
 The saved native evidence in `2026-10-30-cline-tool-plan-live.json`
-(Cline task `1793381190782_17nqu`) confirms an active plan fence, matching
+(Cline task `LOCAL_TASK_ID`) confirms an active plan fence, matching
 prompt/model bindings, one `read_files` call and a formally checked final
 answer. The model did not attempt the requested wrong call. This is positive
 plan-path evidence only; it does not exercise correction.
@@ -89,7 +89,7 @@ status clarification.
 
 ## Native correction confirmed, later task on 2026-10-30
 
-Task `1793382257984_sx4xm` closes the wrong-call/correction gap above.
+Task `LOCAL_TASK_ID` closes the wrong-call/correction gap above.
 Its saved native messages show `run_commands` receiving an error result:
 `ARCHI_GUARD: Nicht ausgeführt` with the expected `read_files` and budget
 `1/2`. It has no successful command output. The next actual call is the
@@ -107,7 +107,7 @@ No model was started and no test was repeated for this verification.
 
 ## Sequential requests and exhaustion: native series completed
 
-Existing Cline task `1793382257984_sx4xm` now provides these separate
+Existing Cline task `LOCAL_TASK_ID` now provides these separate
 native observations, checked on 2026-10-30:
 
 - Request 2: new successful read and answer-bound positive receipt after

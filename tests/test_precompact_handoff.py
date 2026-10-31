@@ -24,7 +24,7 @@ class PreCompactTests(unittest.TestCase):
         (self.home / 'sessions').mkdir(parents=True)
         self.transcript = self.home / 'sessions' / 'session.jsonl'
         self.transcript.write_text('{"type":"local-test"}\n', encoding='utf-8')
-        self.sid = '01a17768-341b-7c71-94be-70a5967cdc6e'
+        self.sid = '00000000-0000-4000-8000-000000000001'
         self.event = dict(hook_event_name='PreCompact', session_id=self.sid,
                           turn_id='turn-local-test', cwd=str(self.cwd),
                           transcript_path=str(self.transcript), trigger='auto')
@@ -112,7 +112,7 @@ class PreCompactTests(unittest.TestCase):
         self.assertEqual(self.manifests(), [])
 
     def test_known_successor_is_preserved_without_creating_a_chat(self):
-        successor = '01a1778c-ed36-77a2-8b42-7ace41185a56'
+        successor = '00000000-0000-4000-8000-000000000002'
         (self.note_dir / (self.sid + '-status.json')).write_text(json.dumps({
             'originThreadId': self.sid, 'repositoryPath': str(self.cwd),
             'successorThreadId': successor}), encoding='utf-8')

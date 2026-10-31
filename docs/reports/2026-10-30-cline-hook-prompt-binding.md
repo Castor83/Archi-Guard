@@ -10,7 +10,7 @@ reminders carry `userRunSpan: 0`. The adapter consequently returned
 Evidence: installed Cline `dist/extension.js`, methods
 `flushPendingHookContexts`, `addUserReminderMessage`, `prepareModelRequest`
 and `applyStopControl`; latest affected native session
-`1793367937054_pb5r2`. Host log ends after context diagnostics with no model
+`LOCAL_TASK_ID`. Host log ends after context diagnostics with no model
 request diagnostics and zero tokens. The host logger does not print the
 exception details, so the precise error is reproduced in isolated adapter
 tests rather than claimed as a captured native exception.

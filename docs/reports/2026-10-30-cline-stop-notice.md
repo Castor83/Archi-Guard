@@ -1,6 +1,6 @@
 # Visible Cline status for Guard stops
 
-Native task `1793369958349_f7m3q` confirms the text-completion guard ran:
+Native task `LOCAL_TASK_ID` confirms the text-completion guard ran:
 receipt route `text`, status `FORMAT_FEHLER`, validation `NICHT_ABGENOMMEN`
 at `2026-10-30T14:19:53.482Z`. Its prompt hash matches the actual task's
 first user message. Answer SHA256:
@@ -58,7 +58,7 @@ and remains open.
 
 ## Native confirmation after reload
 
-Task `1793370773127_uqzzm` started at `2026-10-30T14:32:53.471Z`, performed
+Task `LOCAL_TASK_ID` started at `2026-10-30T14:32:53.471Z`, performed
 one successful read and was stopped by afterModel at `14:33:35.984Z` with
 `FORMAT_FEHLER` / `NICHT_ABGENOMMEN`. Receipt answer SHA256:
 `05cd28ace17012bd10862439217892c9f0a5cea16cc6582d5adc35781ebed97d`.

@@ -8,7 +8,7 @@ Architecture: Bestehende Python-Bridge und OpenCode-Adapter erweitern. Determini
 
 Tech Stack: vorhandenes Python unittest, Node node:test, PowerShell-Deployment; keine neuen Abhängigkeiten.
 
-Spec: Nutzerfreigabe im Chat 01a17d8a-9dd4-7b12-b47a-61426188c749 vom27.10.2026 („dafür machen wir diese Tests“) für den zuvor beschriebenen begrenzten Reparaturumfang. Ausgangsbefund: work/live-test/2026-10-27-guard-auswertung.md im OpenCode-Arbeitsordner.
+Spec: Nutzerfreigabe im Chat 00000000-0000-4000-8000-000000000005 vom27.10.2026 („dafür machen wir diese Tests“) für den zuvor beschriebenen begrenzten Reparaturumfang. Ausgangsbefund: work/live-test/2026-10-27-guard-auswertung.md im OpenCode-Arbeitsordner.
 
 ## Grenzen und Entscheidungen
 

@@ -4,7 +4,7 @@ Stand: 27.10.2026, Europe/Berlin. Die beschriebene modulare Reparatur einschlie�
 
 ## Maßgeblicher Auftrag
 
-Im Chat 01a17cdb-dfc7-77c3-b736-f7ccaaf69b73 wurde „du sollst achi guard reparieren und fertig stellen“ beauftragt und die begrenzte Nachkorrekturempfehlung ausdrücklich bestätigt. Der aktuelle Chat 01a17d22-71f9-7a51-a1cb-05e3e56e3ba1 verlangt die Fortsetzung anhand dieses jüngsten Verlaufs, weil die alte Übergabe unzutreffend war. Neueste verbindliche Präzisierungen: modellunabhängige Funktion und modularer Aufbau.
+Im Chat 00000000-0000-4000-8000-000000000003 wurde „du sollst achi guard reparieren und fertig stellen“ beauftragt und die begrenzte Nachkorrekturempfehlung ausdrücklich bestätigt. Der aktuelle Chat 00000000-0000-4000-8000-000000000004 verlangt die Fortsetzung anhand dieses jüngsten Verlaufs, weil die alte Übergabe unzutreffend war. Neueste verbindliche Präzisierungen: modellunabhängige Funktion und modularer Aufbau.
 
 Die Einschränkung auf Qwen/Ollama ist aufgehoben. Der Guard verwendet für eine Nachkorrektur dieselbe ausgewählte Provider-/Modell-/Variantenreferenz wie der ursprüngliche Auftrag. Er wählt kein anderes Modell. Mehrere Provider-/Modellreferenzen werden offline geprüft; dies ist keine native Abnahme aller Provider.
 

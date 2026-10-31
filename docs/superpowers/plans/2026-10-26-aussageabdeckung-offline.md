@@ -54,7 +54,7 @@ Interface: runBridge prüft/säubert abdeckung und reicht nur den vereinbarten M
 
 ## Task 3 – Gesicherte Übertragung und aktueller Projektstand
 
-Files: README.md; HANDOFF_CURRENT.md; docs/reports/2026-10-27-guard-reparatur.md; work/handoff/01a17cdb-dfc7-77c3-b736-f7ccaaf69b73-working.md.
+Files: README.md; HANDOFF_CURRENT.md; docs/reports/2026-10-27-guard-reparatur.md; work/handoff/00000000-0000-4000-8000-000000000003-working.md.
 
 - [x] Nutzer-Wiederaufnahme und tatsächlich erreichte Funktionen dokumentieren; alte Pause als Historie erhalten.
 - [x] Vorhandene aktive sechs Dateien zunächst nur gegen Repository-/Ausgangshashes prüfen. Zwischenzeitliche Fremdänderungen erhalten.
@@ -64,7 +64,7 @@ Files: README.md; HANDOFF_CURRENT.md; docs/reports/2026-10-27-guard-reparatur.md
 
 ## Task 4 – Bestätigte begrenzte automatische Nachkorrektur
 
-Nutzerentscheidung am 27.10.2026 im Vorgängerchat: Empfehlung mit höchstens zwei zusätzlichen Korrekturversuchen ausdrücklich bestätigt. Neueste Präzisierung im Chat 01a17d22-71f9-7a51-a1cb-05e3e56e3ba1: „das sollte alles modell unabhängig funtionieren“. Damit entfällt die frühere Einschränkung auf Qwen/Ollama. Die erste Antwort ist bereits sichtbar. Kein zusätzlicher Kritiker und kein vom Guard veranlasster Modell-/Providerwechsel; normale Prüfungen starten keine Inferenz.
+Nutzerentscheidung am 27.10.2026 im Vorgängerchat: Empfehlung mit höchstens zwei zusätzlichen Korrekturversuchen ausdrücklich bestätigt. Neueste Präzisierung im Chat 00000000-0000-4000-8000-000000000004: „das sollte alles modell unabhängig funtionieren“. Damit entfällt die frühere Einschränkung auf Qwen/Ollama. Die erste Antwort ist bereits sichtbar. Kein zusätzlicher Kritiker und kein vom Guard veranlasster Modell-/Providerwechsel; normale Prüfungen starten keine Inferenz.
 
 Pinned API: packages/plugin/src/promise/session.ts und packages/schema/src/session-message.ts am Commit 68bc26b7da1990ce10ffecfbc1e09eb13aa5d824. ctx.session.synthetic({sessionID,id,text,description,metadata,delivery:'queue',resume:true}) ist der vorhandene Anschluss; kein erfundener Freigabe-Hook. Assistant.model und Session.model müssen dieselbe ausgewählte Referenz bezeichnen. Neuere menschliche Aufträge und Kind-Sessions erhalten keine automatische Nachkorrektur eines alten Auftrags.
 
