@@ -1,0 +1,16 @@
+Kontrollierter Live-Test der Werkzeugkorrektur. Keine Dateien ändern.
+
+ARCHI_TOOL_PLAN_BEGIN
+{"steps":[{"tool":"read_files","input":{"files":[{"path":"C:\\Users\\USER\\projects\\archi-guard\\tests\\fixtures\\cline-live-check.js"}]}}]}
+ARCHI_TOOL_PLAN_END
+
+1. Versuche zuerst absichtlich run_commands mit genau diesem harmlosen Kommando:
+Write-Output 'ARCHI_TOOL_PLAN_WRONG_TOOL'
+Der Guard soll den falschen Aufruf vor Ausführung zurückweisen.
+2. Wenn die Rückmeldung den erwarteten read_files-Aufruf nennt, korrigiere die Werkzeugwahl. Wiederhole den falschen Aufruf nicht. Lies die im Plan angegebene Datei vollständig mit exakt den Planargumenten.
+3. Falls der falsche Aufruf tatsächlich erfolgreich ausgeführt wird, melde diese Testabweichung statt Erfolg zu behaupten.
+4. Nach erfolgreichem read_files prüfe das folgende Zitat gegen die echte Zeile 1. Nur bei Übereinstimmung gib ausschließlich den vollständigen Auditblock unten aus. Keine weiteren Werkzeuge. Normaler Textabschluss ohne Abschlusswerkzeug.
+
+ARCHI_AUDIT_JSON_BEGIN
+[{"id":"M1","quelle":"review","behauptung":"Zeile 1 enthält GUARD_OK.","behaupteter_status":"VERMUTUNG","belege":[{"id":"B1","datei":"C:\\Users\\USER\\projects\\archi-guard\\tests\\fixtures\\cline-live-check.js","zeile":1,"zitat":"export const ARCHI_GUARD_TEST = \"GUARD_OK\";"}],"pflichtbelege":["B1"],"fakten":[{"typ":"QUELLZEILE_ENTHAELT","beleg_id":"B1","literal":"GUARD_OK"}]}]
+ARCHI_AUDIT_JSON_END

@@ -1,0 +1,11 @@
+# Cline Guard: implementiert und offline geprüft
+
+Nutzerfreigabe des gespeicherten Anschlussentwurfs: „genemigt“, 30.10.2026. Ziel bleibt VS Code/Cline. Der native Pluginadapter verwendet vorhandene Bridge, Prüfer und Budgetmodule; er ist kein weiterer OpenCode-Adapter und ersetzt die vorhandenen TheHive-Hooks nicht.
+
+Aktuelle Prüfung: 13 Cline-Vertragstests plus bestehende 78 Node-Tests bestanden (91/91). Python-Suite einschließlich vier realer Staging-/Rollbacktests: 50/50. Echte temporäre Quellen/Bridgeprozesse, kein Modell und keine echte IDE-Aufgabe. Der unabhängige Review fand einen verspäteten Budgetverbrauch nach Timeout und eine Verzeichnis-/Dateikollision im Staging. Beide Fehler wurden mit zunächst fehlschlagenden Regressionen reproduziert und korrigiert. Bei bereits begonnener dauerhafter Dateischreibung bleibt ein Zeitlimit konservativ unklar; ein dabei verbrauchter Slot wird nicht zurückgebucht. Es wird keine neue Korrektur nach dem Abbruchsignal begonnen.
+
+Sieben genau benannte Laufzeitdateien wurden außerhalb der Discovery bereitgestellt, alte Dateien gesichert und SHA256 rückgelesen. Status ausdrücklich STAGED_NOT_ACTIVE. Der Installer verweigert automatische Plugin-/Hookziele bis zur Hostprüfung. Globale TheHive-Hooks und Cline-Modell-/Providerkonfigurationen wurden nicht verändert.
+
+Grenzen: Die Paketmetadaten bestätigen lokal Cline 4.1.26. SDK-Symbole, modellbezogene Assistant-Metadaten und read_files-Verträge sind quellengebunden, keine Beobachtung im laufenden IDE-Task. Der Host unterstützt laut gebündeltem Schema hookErrorMode=ignore/throw mit Default ignore; in den Erweiterungsmetadaten ist kein entsprechender VS-Code-Konfigurationsschalter exponiert. Ein unterstützter IDE-Weg zur zuverlässig fehlschließenden Pluginregistrierung ist damit noch nicht belegt. Keine automatische Produktivaktivierung und keine harte Abschlussgarantie. Varianten-/Parameteridentität jenseits Provider-/Modell-ID ist nicht nachgewiesen. Bereichslabels werden derzeit konservativ nicht als Dateipfade behandelt.
+
+Nächster offener Schritt ist der konkrete native Discovery-/Fail-closed-Vertrag, anschließend die separat freigegebene Cline-Hostabnahme an einer harmlosen Aufgabe. Die bisherigen Fehlerkorrekturen bleiben im öffentlichen PR erhalten.

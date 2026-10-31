@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+work/*
+!work/native-correction-test/
+work/native-correction-test/*
+!work/native-correction-test/Invoke-NativeCorrectionCheck.ps1
+logs/
+backups/
