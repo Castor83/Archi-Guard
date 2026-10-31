@@ -1,0 +1,8 @@
+{
+  "name": "archi-guard",
+  "private": true,
+  "type": "module",
+  "cline": {
+    "plugins": [{ "paths": ["index.js"] }]
+  }
+}

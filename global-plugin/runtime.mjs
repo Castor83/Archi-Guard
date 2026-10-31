@@ -47,7 +47,7 @@ function coverageMetadata(value) {
   };
 }
 
-const OUTPUT_RULES = `ARCHI GUARD: Maschinell pruefbare Aussagen ueber Quelltext.
+export const OUTPUT_RULES = `ARCHI GUARD: Maschinell pruefbare Aussagen ueber Quelltext.
 Fuege am Ende der abschliessenden Antwort genau einen Datenblock hinzu:
 ARCHI_AUDIT_JSON_BEGIN
 []

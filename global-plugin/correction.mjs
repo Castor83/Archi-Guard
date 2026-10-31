@@ -186,17 +186,21 @@ export async function readCorrectionBudget(value) {
 
 export async function reserveCorrection(value) {
   try {
+    if (value.signal?.aborted) return { status: 'CANCELLED', attempts: null };
     const options = taskOptions(value), model = normalizedModel(value.model);
     if (!token(value.answerID) || !validHash(value.answerHash) || model === null) return blocked();
     const modelHash = hash(JSON.stringify(model)), answerIDHash = hash(value.answerID);
     return await withBudgetLock(options, async () => {
+      if (value.signal?.aborted) return { status: 'CANCELLED', attempts: null };
       const state = await loadState(options) ?? {
         schema: 1, taskHash: options.taskHash, modelHash, attempts: 0, answers: [],
       };
       if (state.modelHash !== modelHash) return blocked();
-      if (state.answers.some(answer => answer.answerIDHash === answerIDHash))
-        return { status: 'DUPLICATE', attempts: state.attempts };
+      const duplicate = state.answers.find(answer => answer.answerIDHash === answerIDHash);
+      if (duplicate) return value.strictDuplicateHash === true && duplicate.answerHash !== value.answerHash
+        ? blocked() : { status: 'DUPLICATE', attempts: state.attempts };
       if (state.attempts >= MAX_ATTEMPTS) return { status: 'EXHAUSTED', attempts: state.attempts };
+      if (value.signal?.aborted) return { status: 'CANCELLED', attempts: state.attempts };
       state.attempts++;
       state.answers.push({ answerIDHash, answerHash: value.answerHash });
       await saveState(options, state);

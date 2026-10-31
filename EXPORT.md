@@ -1,15 +1,24 @@
-# Archi Guard: öffentlicher Quellstand
+# Public review snapshot
 
-Stand: 30.10.2026. Exportierter Quellcommit: `d95aa4f`.
+Updated 2026-10-31 from source commit `9316cbe8acbdab51049f193aa7f6990ecdecab87`.
 
-Dieser Export enthält 35 versionierte Quell-, Test-, Skript- und Dokumentationsdateien außerhalb der privaten Übergabe- und Laufzeitdaten. `PUBLIC-FILES.txt` nennt jede übernommene Datei. Persönliche lokale Benutzernamen sind in den Exportkopien durch `USER` ersetzt. Die private Git-Historie wird nicht veröffentlicht.
+PUBLIC-FILES.txt lists the 64 selected source, test and documentation
+files. Personal usernames in source copies are replaced with USER. Private
+Git history, raw session messages, local runtime receipts, user environment,
+model configuration, backups and handoff files are excluded. Existing dirty
+release snapshots were left untouched; this snapshot starts from the current
+public PR head.
 
-Das manuelle native Testskript `work/native-correction-test/Invoke-NativeCorrectionCheck.ps1` ist als Quelltext enthalten und wurde nicht ausgeführt. Seine historischen Ausführungsfreigaben gelten durch diesen Export nicht erneut. Ausgeschlossen sind die übrigen Inhalte von `work/` (Laufzeitdaten, Backups, lokale Belege und Sitzungsdaten), `HANDOFF_CURRENT.md`, `.superpowers/`, Caches und unversionierte lokale Referenz-/Ergebnisdateien. Historische Berichte verweisen teilweise auf diese nicht veröffentlichten lokalen Nachweise; diese Verweise sind keine mitgelieferten Belege. Wartungsskripte unter `maintenance/codex-hooks` sind historische Quellkopien; ihre Veröffentlichung aktiviert keine Hooks und bescheinigt keinen aktuellen Hostbetrieb.
+This update includes the native Cline adapter and explicit tool-plan workflow,
+bounded correction and visible-stop support, the JSON report CLI, and portable
+instructions for existing Cline context controls. See the bounded native
+acceptance report for the actual tested branches and remaining general limits.
+The stop-notice patch script is optional source, not executed by this export.
+The context correction requires no extension patch.
 
-Archi Guard enthält deterministische Belegprüfung, eine Python-Bridge und einen OpenCode-Adapter mit begrenzter Nachkorrektur. Freie Schlussfolgerungen bleiben semantisch ungeprüft; `freigabe` bleibt `NEIN`. Historische Testergebnisse in den Dokumenten sind keine aktuelle Gesamtabnahme.
-
-Für diesen Export wurden Dateiumfang und Hashes abgeglichen, bekannte sensible Muster geprüft sowie Python-, JavaScript- und PowerShell-Syntax validiert. Es wurden keine Modelle, Dienste, Hooks oder Deployments gestartet. Funktionstests und eine neue Hostabnahme wurden nicht durchgeführt.
-
-## Gezielte Reparatur vom 30.10.2026
-
-Die sechs CodeRabbit-Befunde wurden korrigiert. 201 Offline-Tests bestanden im Quellarbeitsbaum, einschließlich fünf zuvor fehlschlagender neuer Regressionen. Bericht: `docs/reports/2026-10-30-coderabbit-fixes.md`. Cline ist das erklärte Integrationsziel; diese Reparatur stellt noch keine Cline-Anbindung oder Hostabnahme dar.
+Validation in the source tree: 59 Python tests and 114 Node tests passed.
+The three final review findings were reproduced and fixed before export.
+The sanitized snapshot is tested separately before publication. No new model
+inference, runtime installation, hook activation, server start or PR merge is
+part of publication. Formal evidence checking is not semantic acceptance;
+`freigabe` remains `NEIN`.

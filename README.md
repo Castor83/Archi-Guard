@@ -1,5 +1,13 @@
 # Archi Guard: globale Belegprüfung
 
+## Zieloberfläche: VS Code mit Cline
+
+Der zusätzliche [native Cline-Adapter](cline-plugin/README.md) ist implementiert und offline geprüft (50 Python- und 91 Node-Tests am 30.10.2026). Er verwendet die vorhandenen Prüfer, die Bridge und die dauerhaften Korrekturbudgets. Das Stagingskript stellt die Dateien außerhalb automatisch geladener Verzeichnisse bereit; bestehende TheHive-Hooks bleiben erhalten.
+
+**Begrenzte native Cline-Abnahme, Stand 31.10.2026:** Echte Hostbelege bestätigen Quellprüfung, Werkzeugkorrektur, getrennte Folgeaufträge, Ablehnung alter Lesebelege, Stopp beim dritten Fehlaufruf und erfolgreichen neuen Auftrag danach. Ein positiver Zweischritt-Werkzeugplan ist ebenfalls belegt. Die [Abnahmeübersicht](docs/reports/2026-10-31-bounded-native-acceptance.md) trennt diese Nachweise von offenen allgemeinen Garantien. Semantik und ein garantierter Abbruch bei jedem externen Hookfehler sind weiterhin nicht abgenommen. Die OpenCode-Integration bleibt ein separater Hostadapter.
+
+Vorhandene [Cline-Kontextlimits](docs/cline-context.md) begrenzen Werkzeugausgaben und Nachrichtentext ohne neuen Filter. Das [Berichts-CLI](docs/report-summary.md) fasst JSON-Ergebnisfelder zusammen, ohne fehlende Angaben als bestanden auszulegen.
+
 ## Modularer Aufbau
 
 - **Prüfkern:** `archi_belegpruefer_v1_1.py` und `archi_schlusspruefer_v2.py` prüfen Belege deterministisch, unabhängig von Modell und Provider.
